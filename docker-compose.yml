@@ -1,0 +1,62 @@
+version: '3'
+
+networks:
+  webapp:
+    driver: bridge
+    internal: true
+    ipam:
+      driver: default
+      config:
+       - subnet: 172.16.238.0/24
+
+services:
+  back:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+      args:
+        FLASK_APP: ${APP_NAME}
+        FLASK_ENV: ${PROCESS}
+    container_name: ${APP_NAME}_back
+    env_file: .env
+    ports:
+    - "5000:5000"
+    volumes:
+      - ./back:/app
+    networks:
+      default:
+      webapp:
+        ipv4_address: 172.16.238.2
+    depends_on:
+      - notebook
+      - front
+
+  notebook:
+    build:
+      context: ./notebook
+      dockerfile: Dockerfile
+    container_name: ${APP_NAME}_notebook
+    env_file: .env
+    ports:
+    - "8888:8888"
+    volumes:
+      - ./notebook:/app
+      - ./back/jupyter:/app/jupyter
+    networks:
+      default:
+      webapp:
+        ipv4_address: 172.16.238.3
+
+  front:
+      build:
+          context: ./front
+          dockerfile: Dockerfile
+      container_name: ${APP_NAME}_front
+      ports:
+      - "8080:8080"
+      volumes:
+          - ./front:/var/www/html
+      networks:
+        default:
+        webapp:
+          ipv4_address: 172.16.238.4
