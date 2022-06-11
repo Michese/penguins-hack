@@ -1,23 +1,25 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
-<!--  <header>-->
-<!--    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />-->
-
-<!--    <div class="wrapper">-->
-<!--      <HelloWorld msg="You did it!" />-->
-
-<!--      <nav>-->
-<!--        <RouterLink to="/">Home</RouterLink>-->
-<!--        <RouterLink to="/about">About</RouterLink>-->
-<!--      </nav>-->
-<!--    </div>-->
-<!--  </header>-->
-
-  <RouterView />
+  <HeaderComponent />
+  <MenuComponent />
+  <main id="main" class="main">
+    <RouterView />
+  </main>
 </template>
+
+<script>
+import { RouterLink, RouterView } from 'vue-router'
+import MenuComponent from "./views/layout/menu/MenuComponent.vue";
+import HeaderComponent from "./views/layout/header/HeaderComponent.vue";
+
+export default {
+  name: 'App',
+  components: {
+    MenuComponent,
+    RouterView,
+    HeaderComponent,
+  },
+}
+</script>
 
 <style lang="scss">
 @import "./assets/base.scss";
