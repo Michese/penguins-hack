@@ -7,11 +7,6 @@ const config = {
         Accept: 'application/json',
     },
     timeout: 30000,
-    // proxy: {
-    //     protocol: 'http',
-    //     host: '127.0.0.1',
-    //     port: 5000,
-    // },
 };
 
 export class Api {

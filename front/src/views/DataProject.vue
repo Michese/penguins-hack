@@ -11,14 +11,19 @@
     <h2>Ответ</h2>
     <p>{{ answer }}</p>
   </div>
+  <data-graphic :ckra="[{ x: 100, y: 0}, { x: 50, y: 50 }, { x: 0, y: 100 } ]" />
 </div>
 </template>
 
 <script>
-import {DataProjectApi} from "@/api/dataProjectApi/DataProjectApi";
+import {DataProjectApi} from "../api/dataProjectApi/DataProjectApi";
+import DataGraphic from "../components/chartsVue/dataGraphic/DataGraphic.vue";
 
 export default {
   name: "DataProject",
+  components: {
+    DataGraphic
+  },
   data: () => ({
     answer: '',
   }),
