@@ -4,7 +4,9 @@ from flask import request
 import numpy as np
 import pandas as pd
 import joblib
-from jupyter.app import sayHello
+from jupyter.app import vk_full
+
+
 from data import classmatesData
 from data import telegrammData
 from data import vkData
@@ -43,8 +45,14 @@ def hello():
 
 @app.route('/api/user', methods=['GET'])
 def user():
-    data = userData()
-    return json.dumps(data)
+    # data = userData()
+    data1, data2 = vk_full()
+
+    # return json.dumps(data)
+    return json.dumps({
+        'data1': data1.values.tolist(),
+        'data2': data2.values.tolist(),
+    })
 
 
 @app.route('/api/classmates', methods=['GET'])
