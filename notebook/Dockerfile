@@ -18,6 +18,7 @@ EXPOSE 8888
 CMD cp dep_vk.xlsx jupyter/dep_vk.xlsx && \
 cp dep_tg.xlsx jupyter/dep_tg.xlsx && \
 cp dep_user.csv jupyter/dep_user.csv && \
+cp dep_ok.xlsx jupyter/dep_ok.xlsx && \
 jupyter nbconvert app.ipynb --to python --output jupyter/app.py && \
     /usr/bin/python3 jupyter/app.py && \
     jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root

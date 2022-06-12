@@ -5,6 +5,9 @@ import numpy as np
 import pandas as pd
 import joblib
 from jupyter.app import vk_full
+from jupyter.app import ok_full
+from jupyter.app import csv_full
+from jupyter.app import tg_full
 from jupyter.app import arrXY
 from jupyter.app import series_arr
 
