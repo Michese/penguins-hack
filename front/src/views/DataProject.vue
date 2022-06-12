@@ -103,8 +103,8 @@ export default {
       });
     },
   },
-  created() {
-    console.log('functionNames[index]', functionNames[0]);
+  async created() {
+    // console.log('functionNames[index]', functionNames[0]);
   },
   computed: {
     graphicsData() {

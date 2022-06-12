@@ -8,7 +8,7 @@ RUN apk add --no-cache --update \
     libxslt libxslt-dev \
     libjpeg-turbo-dev zlib-dev \
     py3-pandas py3-scikit-learn py3-threadpoolctl \
-    && pip install --no-cache --upgrade pip setuptools wheel flask \
+    && pip install --no-cache --upgrade pip setuptools wheel flask joblib openpyxl \
     && export FLASK_APP=$FLASK_APP && export FLASK_ENV=$FLASK_ENV
 
 WORKDIR /app

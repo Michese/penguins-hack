@@ -3,8 +3,15 @@
 </template>
 
 <script>
+import {DataProjectApi} from "../api/dataProjectApi/DataProjectApi";
+
 export default {
-  name: "About"
+  name: "About",
+  async created() {
+    const result = await DataProjectApi.sayHello();
+    // console.log('result', result);
+    // console.log(1231);
+  }
 }
 </script>
 

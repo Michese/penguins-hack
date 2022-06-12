@@ -4,6 +4,7 @@ from flask import request
 import numpy as np
 import pandas as pd
 import joblib
+from jupyter.app import sayHello 
 
 # from livereload import Server
 
@@ -34,6 +35,13 @@ def hello():
     answer = clf.predict(dataPd)
     # , cls=NumpyEncoder
     return json.dumps(int(answer[0]))
+
+
+@app.route('/api/sayHello', methods=['GET'])
+def hello2():
+    result = sayHello()
+    return json.dumps(result.to_numpy().tolist())
+
 
 
 if __name__ == '__main__':
