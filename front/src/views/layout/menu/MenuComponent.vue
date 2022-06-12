@@ -19,7 +19,7 @@
 
       <li class="nav-item">
         <router-link  :to="{ name: 'сlassmates' }" active-class="collapsed" class="nav-link" data-bs-target="#charts-nav" data-bs-toggle="collapse">
-          <span>Одноклассиники</span>
+          <span>Одноклассники</span>
         </router-link>
       </li>
 

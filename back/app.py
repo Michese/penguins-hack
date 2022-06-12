@@ -5,6 +5,8 @@ import numpy as np
 import pandas as pd
 import joblib
 from jupyter.app import vk_full
+from jupyter.app import arrXY
+from jupyter.app import series_arr
 
 
 from data import classmatesData
@@ -16,6 +18,56 @@ from data import userData
 
 app = Flask(__name__)
 
+def object_line(df, dfXName,dfYname,xKey,yKey, title, xType):
+    data = arrXY(df, dfXName,dfYname,xKey,yKey)
+    return{
+            'component': 'LineCard',
+            'title': title,
+            'item': {
+                'series': [{ 'data': data, 'yName': dfYname }],
+                'xKey': xKey,
+                'yKey': yKey,
+                'xType': xType,
+            }
+            }
+
+def object_points(df, dfXName,dfYname,xKey,yKey, title):
+    data = arrXY(df, dfXName,dfYname,xKey,yKey)
+    return{
+            'component': 'ScatterCard',
+            'title': title,
+            'item': {
+                'series': [{ 'data': data, 'yName': dfYname }],
+                'xKey': xKey,
+                'yKey': yKey,
+            }
+            }
+
+def object_Pie(df, dfAngleName,dfLabelname,angleKey,labelKey, title):
+    data = arrXY(df, dfAngleName,dfLabelname,angleKey,labelKey)
+    return{
+            'component': 'PieCard',
+            'title': title,
+            'item': {
+              'data': data,
+              'angleKey': angleKey,
+              'labelKey': labelKey,
+            }
+          }
+
+
+def object_histogram(df, dfXName,dfYname,xKey,yKey, title):
+    data = series_arr(df, dfXName,dfYname,xKey,yKey)
+
+    return{
+            'component': 'HistogramCard',
+            'title': title,
+            'item': {
+              'series': data,
+              'xKey': xKey,
+              'yKey': yKey,
+            }
+          }
 
 @app.after_request
 def set_response_headers(response):
@@ -49,10 +101,7 @@ def user():
     data1, data2 = vk_full()
 
     # return json.dumps(data)
-    return json.dumps({
-        'data1': data1.values.tolist(),
-        'data2': data2.values.tolist(),
-    })
+    return json.dumps([[object_line(data1,'datetime_post','views','x','y','Комментарии','time')]])
 
 
 @app.route('/api/classmates', methods=['GET'])
