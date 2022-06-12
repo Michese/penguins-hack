@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <h5 class="card-title">{{ title }}</h5>
+    <h5 class="card-title ps-3">{{ title }}</h5>
     <div class="card-body">
       <pie-graphic :data="item.data" :angle-key="item.angleKey" :label-key="item.labelKey" />
     </div>

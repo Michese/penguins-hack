@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <h5 class="card-title">{{ title }}</h5>
+    <h5 class="card-title ps-3">{{ title }}</h5>
     <div class="card-body">
       <line-graphic :series="item.series" :x-key="item.xKey" :y-key="item.yKey"/>
     </div>

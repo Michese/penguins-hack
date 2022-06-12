@@ -18,8 +18,8 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://172.16.238.2:5000',
-        // target: 'http://localhost:5000',
+        // target: 'http://172.16.238.2:5000',
+        target: 'http://localhost:5000',
         secure: false,
         changeOrigin: true,
       },
@@ -30,8 +30,8 @@ export default defineConfig({
     host: '0.0.0.0',
     proxy: {
       '^/api': {
-        target: 'http://172.16.238.2:5000',
-        // target: 'http://localhost:5000',
+        // target: 'http://172.16.238.2:5000',
+        target: 'http://localhost:5000',
         secure: false,
         changeOrigin: true,
       },

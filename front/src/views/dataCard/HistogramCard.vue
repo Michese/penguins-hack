@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <h5 class="card-title">{{ title }}</h5>
+    <h5 class="card-title ps-3">{{ title }}</h5>
     <div class="card-body">
       <histogram-graphic :series="item.series" :y-key="item.yKey" :x-key="item.xKey" :x-name="item.xName" />
     </div>

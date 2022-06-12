@@ -1,19 +1,37 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import DataProject from '../views/DataProject.vue'
-import About from "../views/About.vue";
+import HomePage from "../views/HomePage.vue";
+import ClassmatesPage from '../views/ClassmatesPage.vue'
+import TelegrammPage from "../views/TelegrammPage.vue";
+import VKontaktePage from "../views/VKontaktePage.vue";
+import UserPage from "../views/UserPage.vue";
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
       name: 'home',
-      component: DataProject
+      component: HomePage
     },
     {
-      path: '/about',
-      name: 'about',
-      component: About
+      path: '/user',
+      name: 'user',
+      component: UserPage
+    },
+    {
+      path: '/сlassmates',
+      name: 'сlassmates',
+      component: ClassmatesPage
+    },
+    {
+      path: '/telegramm',
+      name: 'telegramm',
+      component: TelegrammPage
+    },
+    {
+      path: '/vk',
+      name: 'vk',
+      component: VKontaktePage
     },
   ]
 })

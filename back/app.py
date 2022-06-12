@@ -4,7 +4,11 @@ from flask import request
 import numpy as np
 import pandas as pd
 import joblib
-from jupyter.app import sayHello 
+from jupyter.app import sayHello
+from data import classmatesData
+from data import telegrammData
+from data import vkData
+from data import userData
 
 # from livereload import Server
 
@@ -37,11 +41,28 @@ def hello():
     return json.dumps(int(answer[0]))
 
 
-@app.route('/api/sayHello', methods=['GET'])
-def hello2():
-    result = sayHello()
-    return json.dumps(result.to_numpy().tolist())
+@app.route('/api/user', methods=['GET'])
+def user():
+    data = userData()
+    return json.dumps(data)
 
+
+@app.route('/api/classmates', methods=['GET'])
+def classmates():
+    data = classmatesData()
+    return json.dumps(data)
+
+
+@app.route('/api/telegramm', methods=['GET'])
+def telegramm():
+    data = telegrammData()
+    return json.dumps(data)
+
+
+@app.route('/api/vk', methods=['GET'])
+def vk():
+    data = vkData()
+    return json.dumps(data)
 
 
 if __name__ == '__main__':
