@@ -18,8 +18,8 @@
       </li>
 
       <li class="nav-item">
-        <router-link  :to="{ name: 'сlassmates' }" active-class="collapsed" class="nav-link" data-bs-target="#charts-nav" data-bs-toggle="collapse">
-          <span>Одноклассники</span>
+        <router-link  :to="{ name: 'vk' }" active-class="collapsed" class="nav-link" data-bs-target="#charts-nav" data-bs-toggle="collapse">
+          <span>Вконтакте</span>
         </router-link>
       </li>
 
@@ -30,10 +30,11 @@
       </li>
 
       <li class="nav-item">
-        <router-link  :to="{ name: 'vk' }" active-class="collapsed" class="nav-link" data-bs-target="#charts-nav" data-bs-toggle="collapse">
-          <span>Вконтакте</span>
+        <router-link  :to="{ name: 'сlassmates' }" active-class="collapsed" class="nav-link" data-bs-target="#charts-nav" data-bs-toggle="collapse">
+          <span>Одноклассники</span>
         </router-link>
       </li>
+
     </ul>
 
   </aside>

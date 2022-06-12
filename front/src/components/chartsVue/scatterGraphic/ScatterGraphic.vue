@@ -13,6 +13,10 @@ export default {
       type: Array,
       required: true,
     },
+    xType:{
+      type: String,
+      default: 'number',
+    },
     xKey: {
       type: String,
       default: 'x',
@@ -41,7 +45,7 @@ export default {
         })),
         axes: [
           {
-            type: 'number',
+            type: this.xType,
             position: 'bottom',
           },
           {
@@ -50,6 +54,7 @@ export default {
           },
         ],
         legend: {
+          enabled: false, 
           position: 'top',
         },
       };

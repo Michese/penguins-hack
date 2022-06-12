@@ -25,22 +25,28 @@ export default {
       required: true,
     }
   },
-  created(){
-    console.log(this.item)
-  },
   computed: {
     series(){
       return this.item.series.map(data =>{
-        console.log('data',data)
         return{
           ...data,
           data:data.data.map(item =>({
-            [this.item.xKey]:typeof item[this.item.xKey] === 'string' ? new Date(item[this.item.xKey]):item[this.item.xKey],
-            [this.item.yKey]:typeof item[this.item.yKey] === 'string' ?new Date(item[this.item.yKey]):item[this.item.yKey]
+            [this.item.xKey]:this.parseData(item[this.item.xKey]),
+            [this.item.yKey]:this.parseData(item[this.item.yKey])
 
           }))
         }
       })
+    }
+  },
+  methods:{
+    parseData(data){
+      if(typeof data === 'string' && new Date(data)?.getFullYear()){
+        return new Date(data)
+      }        
+      else{
+        return data;
+      }
     }
   }
 }

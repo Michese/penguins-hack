@@ -53,6 +53,7 @@ export default {
           },
         ],
         legend: {
+          enabled: false, 
           position: 'top',
         },
       };

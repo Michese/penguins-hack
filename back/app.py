@@ -34,7 +34,7 @@ def object_line(df, dfXName,dfYname,xKey,yKey, title, xType):
             }
             }
 
-def object_points(df, dfXName,dfYname,xKey,yKey, title):
+def object_points(df, dfXName,dfYname,xKey,yKey, title, xType):
     data = arrXY(df, dfXName,dfYname,xKey,yKey)
     return{
             'component': 'ScatterCard',
@@ -43,6 +43,7 @@ def object_points(df, dfXName,dfYname,xKey,yKey, title):
                 'series': [{ 'data': data, 'yName': dfYname }],
                 'xKey': xKey,
                 'yKey': yKey,
+                'xType': xType,
             }
             }
 
@@ -59,7 +60,7 @@ def object_Pie(df, dfAngleName,dfLabelname,angleKey,labelKey, title):
           }
 
 
-def object_histogram(df, dfXName,dfYname,xKey,yKey, title):
+def object_histogram(df, dfXName,dfYname,xKey,yKey, title, xType):
     data = series_arr(df, dfXName,dfYname,xKey,yKey)
 
     return{
@@ -69,6 +70,7 @@ def object_histogram(df, dfXName,dfYname,xKey,yKey, title):
               'series': data,
               'xKey': xKey,
               'yKey': yKey,
+              'xType': xType,
             }
           }
 
@@ -101,28 +103,92 @@ def hello():
 @app.route('/api/user', methods=['GET'])
 def user():
     # data = userData()
-    data1, data2 = vk_full()
+    data_gender, data_city, dep_csv_birth_date = csv_full()
 
-    # return json.dumps(data)
-    return json.dumps([[object_line(data1,'datetime_post','views','x','y','Комментарии','time')]])
-
+    return json.dumps([[
+        object_Pie(data_city,'contract_sum','city','date','contract_sum','Сумма договора'),
+        object_Pie(data_city,'purchase_sum','city','date','purchase_sum',' Покупки за месяц, сумма, руб'),
+        object_Pie(data_city,'purchase_count','city','date','purchase_count','Покупки за месяц, кол-во'),
+    ],
+    [
+        object_line(data_city,'city','contract_sum','date','city','Сумма договора','category'),
+        object_line(data_city,'city','purchase_sum','date','city',' Покупки за месяц, сумма, руб','category')
+    ],
+    [
+        object_points(dep_csv_birth_date,'birth_date','contract_sum','date','birth_date','Cумма договора','number'),
+        object_points(dep_csv_birth_date,'birth_date','purchase_sum','date','birth_date','Покупки за месяц, сумма, руб','number'),
+        object_points(dep_csv_birth_date,'birth_date','purchase_count','date','birth_date','Покупки за месяц, кол-во','number')
+    ],
+    [
+        object_line(data_city,'city','purchase_count','date','city','Покупки за месяц, кол-во','category')
+    ],
+    [
+        object_Pie(data_gender,'contract_sum','gender','date','contract_sum','Сумма договора'),
+        object_Pie(data_gender,'purchase_sum','gender','date','purchase_sum',' Покупки за месяц, сумма, руб'),
+        object_Pie(data_gender,'purchase_count','gender','date','purchase_count','Покупки за месяц, кол-во'),
+    ]
+    ]
+    )
 
 @app.route('/api/classmates', methods=['GET'])
 def classmates():
-    data = classmatesData()
-    return json.dumps(data)
+    data, data_interval = ok_full()
+
+    return json.dumps([[
+        object_line(data,'datetime_post','likes','date','likes','Лайки','time'),
+    ],
+    [
+        object_line(data,'datetime_post','comments','date','comments','Комментарии','time'),
+        object_line(data,'datetime_post','reposts','date','reposts','Репосты','time'),
+    ],
+    [
+        object_points(data_interval,'interval','likes','date','likes','Лайки','category'),
+        object_points(data_interval,'interval','comments','date','comments','Комментарии','category'),
+        object_points(data_interval,'interval','reposts','date','reposts','Репосты','category')
+    ],
+    [
+        object_line(data,'datetime_post','coef_vov','date','coef_vov','Виральный охват','time')
+    ]])
 
 
 @app.route('/api/telegramm', methods=['GET'])
 def telegramm():
-    data = telegrammData()
-    return json.dumps(data)
+    data, data_interval = tg_full()
+
+    return json.dumps([[
+        object_line(data,'datetime_post','views','date','views','Просмотры','time')
+    ],
+    [
+        object_points(data_interval,'interval','coef_ohv','date','coef_ohv','Виральный охват','category'),
+        object_points(data_interval,'interval','views','date','views','Просмотры','category'),
+    ],
+    [
+        object_line(data,'datetime_post','coef_ohv','date','coef_ohv','Виральный охват','time'),
+    ]])
 
 
 @app.route('/api/vk', methods=['GET'])
 def vk():
-    data = vkData()
-    return json.dumps(data)
+    data, data_interval = vk_full()
+
+    return json.dumps([[
+        object_line(data,'datetime_post','likes','date','likes','Лайки','time'),
+        object_line(data,'datetime_post','views','date','views','Просмотры','time')
+    ],
+    [
+        object_line(data,'datetime_post','comments','date','comments','Комментарии','time'),
+        object_line(data,'datetime_post','reposts','date','reposts','Репосты','time'),
+        object_line(data,'datetime_post','coef_ohv','date','coef_ohv','Коэффициент вовлеченности','time')
+    ],
+    [
+        object_points(data_interval,'interval','likes','date','likes','Лайки','category'),
+        object_points(data_interval,'interval','comments','date','comments','Комментарии','category'),
+        object_points(data_interval,'interval','views','date','views','Просмотры','category'),
+        object_points(data_interval,'interval','reposts','date','reposts','Репосты','category')
+    ],
+    [
+        object_line(data,'datetime_post','coef_vov','date','coef_vov','Виральный охват','time')
+    ]])
 
 
 if __name__ == '__main__':

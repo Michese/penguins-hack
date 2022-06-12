@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <h2 class="card-title text-center page-title">Анализ базы клиентов</h2>
     <div v-if="isLoading" class="d-flex justify-content-center">
       <loader/>
     </div>
@@ -45,6 +46,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.page-title{
+  font-size: 2em;
+}
 .container {
   max-width: 1200px;
   margin: 0 auto;
